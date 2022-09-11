@@ -1,0 +1,25 @@
+{
+  "name": "12_sql_employee-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattG-Git/12_SQL_Employee-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MattG-Git/12_SQL_Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/MattG-Git/12_SQL_Employee-Tracker#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.3.3"
+  }
+}
