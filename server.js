@@ -39,7 +39,7 @@ app.get('/api/departments', (req, res) => {
 
 // view all roles
 app.get('/api/roles', (req, res) => {
-  const sql = `SELECT roles.id, roles.title, department.id AS departments, roles.salary, department_id FROM roles JOIN department ON department_id = departments.id`;
+  const sql = `SELECT roles.id, roles.title, departments.id AS departments, roles.salary, department_id FROM roles JOIN departments ON department_id = departments.id`;
   
   db.query(sql, (err, rows) => {
     if (err) {
@@ -55,7 +55,7 @@ app.get('/api/roles', (req, res) => {
 
 // view all employees
 app.get('/api/employees', (req, res) => {
-  const sql = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.name AS department, roles.salary AS salary, concat(managers.first_name, \' \', managers.last_name) AS manager FROM employee JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.department_id = departments.id LEFT JOIN employees as managers ON mangers.id = employee.manager_id`;
+  const sql = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.department_name AS departments, roles.salary AS salary, concat(managers.first_name, \' \', managers.last_name) AS manager FROM employees JOIN roles ON employees.role_id = roles.id JOIN departments ON roles.department_id = departments.id LEFT JOIN employees as managers ON managers.id = employees.manager_id`;
   
   db.query(sql, (err, rows) => {
     if (err) {
@@ -70,10 +70,10 @@ app.get('/api/employees', (req, res) => {
 });
 
 //add department
-app.post('/api/add-department', ({ body }, res) => {
-  const sql = `INSERT INTO departments (name)
+app.post('/api/departments', ({ body }, res) => {
+  const sql = `INSERT INTO departments (department_name)
     VALUES (?)`;
-  const params = [body.name];
+  const params = [body.department_name];
   
   db.query(sql, params, (err, result) => {
     if (err) {
@@ -88,10 +88,10 @@ app.post('/api/add-department', ({ body }, res) => {
 });
 
 //add role
-app.post('/api/add-role', ({ body }, res) => {
+app.post('/api/roles', ({ body }, res) => {
   const sql = `INSERT INTO roles (title, salary, department_id)
     VALUES (?, ?, ?)`;
-  const params = [body.title, body.salary, body.department];
+  const params = [body.title, body.salary, body.department_id];
   
   db.query(sql, params, (err, result) => {
     if (err) {
@@ -106,7 +106,7 @@ app.post('/api/add-role', ({ body }, res) => {
 });
 
 //add employee
-app.post('/api/add-employee', ({ body }, res) => {
+app.post('/api/employees', ({ body }, res) => {
   const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id)
     VALUES (?, ?, ?, ?)`;
   const params = [body.first_name, body.last_name, body.role_id, body.manager_id];
