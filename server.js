@@ -69,6 +69,81 @@ app.get('/api/employees', (req, res) => {
   });
 });
 
+//add department
+app.post('/api/add-department', ({ body }, res) => {
+  const sql = `INSERT INTO departments (name)
+    VALUES (?)`;
+  const params = [body.name];
+  
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: body
+    });
+  });
+});
+
+//add role
+app.post('/api/add-role', ({ body }, res) => {
+  const sql = `INSERT INTO roles (title, salary, department_id)
+    VALUES (?, ?, ?)`;
+  const params = [body.title, body.salary, body.department];
+  
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: body
+    });
+  });
+});
+
+//add employee
+app.post('/api/add-employee', ({ body }, res) => {
+  const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id)
+    VALUES (?, ?, ?, ?)`;
+  const params = [body.first_name, body.last_name, body.role_id, body.manager_id];
+  
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: body
+    });
+  });
+});
+
+//update employee role
+app.put('/api/employees/:id', (req, res) => {
+  const sql = `UPDATE role_id SET role_id = ? WHERE id = ?`;
+  const params = [req.body.role_id];
+
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    } else if (!result.affectedRows) {
+      res.json({
+        message: 'Employee not found'
+      });
+    } else {
+      res.json({
+        message: 'success',
+        data: req.body,
+        changes: result.affectedRows
+      });
+    }
+  });
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
