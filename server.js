@@ -125,8 +125,8 @@ app.post('/api/employees', ({ body }, res) => {
 
 //update employee role
 app.put('/api/employees/:id', (req, res) => {
-  const sql = `UPDATE role_id SET role_id = ? WHERE id = ?`;
-  const params = [req.body.role_id];
+  const sql = `UPDATE employees SET role_id = ? WHERE id = ?`;
+  const params = [req.body.role_id, req.params.id];
 
   db.query(sql, params, (err, result) => {
     if (err) {
