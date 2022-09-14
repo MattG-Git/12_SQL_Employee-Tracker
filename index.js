@@ -33,13 +33,13 @@ const mainMenu = () => {
         type: 'list',
         message: 'What would you like to do?',
         choices: [
-            'View All Employees',
-            'Add Employee',
-            'Update Employee Role',
-            'View All Roles',
-            'Add Role',
             'View All Departments',
-            'Add Department'
+            'View All Roles',
+            'View All Employees',
+            'Add Department',
+            'Add Role',
+            'Add Employee',
+            'Update Employee Role'
         ]
     }).then((response) => {
         //this switch statement iterates over selections
@@ -71,7 +71,7 @@ const mainMenu = () => {
                 newRole();
                 break;
 
-            case 'View All Departments' :
+            case 'View All Departments':
                 sql = `SELECT * FROM departments`;
                 db.query(sql, (err, rows) => {
                     if (err) {
@@ -80,7 +80,6 @@ const mainMenu = () => {
                     }
                     viewDepartments(rows);
                 });
-                viewDepartments();
                 break;
 
             case 'Add Department' :
