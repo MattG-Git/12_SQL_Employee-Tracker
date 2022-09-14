@@ -48,3 +48,5 @@ The user will be prompted with a list of the following choices:
 ![SQL Employee Tracker](./Screenshot.png)
 
 # Video Demo
+
+[SQL Employee Tracker Recording.webm](https://user-images.githubusercontent.com/70189946/190280252-abb1b4e3-62c4-4af5-b52e-814bab2ac489.webm)
