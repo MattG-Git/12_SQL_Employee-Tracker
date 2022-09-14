@@ -45,6 +45,6 @@ The user will be prompted with a list of the following choices:
 
 
 # Screenshot
-![SQL Employee Tracker](./screenshot.png)
+![SQL Employee Tracker](./Screenshot.png)
 
 # Video Demo
